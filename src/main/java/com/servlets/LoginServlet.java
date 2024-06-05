@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.service.UserService;
+import com.service.UserServiceImpl;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -38,7 +41,9 @@ public class LoginServlet extends HttpServlet {
 		      String un =  request.getParameter("username");
 		      String psw = request.getParameter("password");
 		      
-		      if(un.equals("hari") && psw.equals("123")) {
+		      UserService service = new UserServiceImpl();
+		      
+		      if(service.login(un, psw)) {
 		    	  
 		    	  request.setAttribute("uname", un);
 		    	  request.getRequestDispatcher("Home.jsp").forward(request, response);
@@ -48,7 +53,6 @@ public class LoginServlet extends HttpServlet {
 		    	  request.getRequestDispatcher("LoginForm.jsp").forward(request, response);
 		      }
 		      
-		      //Profile.jsp
 		
 	}
 
